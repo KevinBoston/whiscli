@@ -3,8 +3,9 @@ class Whiscli::CLI
 #  attr_reader :categories
   def initialize
     @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
-    @links = ["https://www.liquorama.net/spirits/japanese-whisky/", "https://www.liquorama.net/bourbon-whiskey/", "https://www.liquorama.net/single-malt-scotch-whisky/"]
+    @links = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/"]
     @selection = nil 
+    @baseurl = "https://liquorama.net"
   end
   def call 
    welcome 
