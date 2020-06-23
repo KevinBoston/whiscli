@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require_relative "../lib/whiscli"
 
-WHISCLI::CLI.new.call
+Whiscli::CLI.new.call

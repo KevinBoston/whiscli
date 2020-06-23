@@ -8,7 +8,7 @@ class Scraper
     #store matches in array
     #scrape match array to make category objects
 
-    doc
+   # doc
   #end
    name = "Glen - fake"
    price = "$100 - fake"
@@ -27,7 +27,8 @@ class Scraper
   end
   def find_whisky(url)
     doc = Nokogiri::HTML.open(url)
-    container = nokogiri... blah blah 
+    container = [Cli.links]
+    #nokogiri... blah blah 
     contailer.each do |whisky_frame|
       whisky_frame.scrape_whisky
     end

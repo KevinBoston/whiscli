@@ -16,3 +16,4 @@ class Whisky
   def self.wishlist
     @@list 
   end
+end

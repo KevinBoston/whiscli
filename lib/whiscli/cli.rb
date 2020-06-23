@@ -1,6 +1,7 @@
 class Whiscli::CLI
-  attr_accessor :category, :links, :selection
-  @category = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
+  attr_accessor :links, :selection, :categories
+#  attr_reader :categories
+  @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
   @links = ["https://www.liquorama.net/spirits/japanese-whisky/", "https://www.liquorama.net/bourbon-whiskey/", "https://www.liquorama.net/single-malt-scotch-whisky/"]
   @selection = nil 
   def call 
