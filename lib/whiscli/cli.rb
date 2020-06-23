@@ -1,9 +1,11 @@
 class Whiscli::CLI
   attr_accessor :links, :selection, :categories
 #  attr_reader :categories
-  @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
-  @links = ["https://www.liquorama.net/spirits/japanese-whisky/", "https://www.liquorama.net/bourbon-whiskey/", "https://www.liquorama.net/single-malt-scotch-whisky/"]
-  @selection = nil 
+  def initialize
+    @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
+    @links = ["https://www.liquorama.net/spirits/japanese-whisky/", "https://www.liquorama.net/bourbon-whiskey/", "https://www.liquorama.net/single-malt-scotch-whisky/"]
+    @selection = nil 
+  end
   def call 
    welcome 
    list_categories
@@ -25,17 +27,20 @@ class Whiscli::CLI
     input = nil
     input = gets.strip.downcase
     while input != "exit"
-    puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about:"
+   # puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about:"
     case input
     when "1"
-      @selection = @category[0].index
-      puts "More info on #{@category[0]}"
+      @selection = @categories[0].index
+      puts "More info on #{@categories[0]}"
+      whisky_menu
     when "2"
-      @selection = @category[1].index
-      puts "More info on #{@category[1]}"
+      @selection = @categories[1].index
+      puts "More info on #{@categories[1]}"
+      whisky_menu
     when "3"
-      @selection = @category[2].index
-      puts "More info on #{@category[2]}"
+      @selection = @categories[2].index
+      puts "More info on #{@categories[2]}"
+      whisky_menu
     when "list"
       Whisky.wishlist
     end
