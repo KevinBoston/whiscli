@@ -1,4 +1,5 @@
 class WHISCLI::CLI
+  attr_accessor :category, :links, :selection
   @category = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
   @links = ["https://www.liquorama.net/spirits/japanese-whisky/", "https://www.liquorama.net/bourbon-whiskey/", "https://www.liquorama.net/single-malt-scotch-whisky/"]
   @selection = nil 
@@ -10,7 +11,7 @@ class WHISCLI::CLI
   end
 
   def welcome
-   puts “Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about or type list to see your wish list:” 
+   puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about or type list to see your wish list:" 
   end
 
   def list_categories

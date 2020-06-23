@@ -17,6 +17,9 @@ class Scraper
     new_whisky.name = name
     new_whisky.price = price
     new_whisky.url = 
+    whisky_page = Nokogiri::HTML.open(new_whisky.url)
+    price
+    description
     #etc
     new_whisky
   end

@@ -1,11 +1,12 @@
 class Whisky
 
-  attr_accessor :name, :age, :price, :link, :alcohol_content, :category
+  attr_accessor :name, :age, :price, :link, :alcohol_content, :category, :description
   @@all = []
   @@list = []
-  def initialize(name)
+  def initialize
     @name = name
     @@all << self
+    self.category = Cli.categories[Cli.selection]
   end
     
 
