@@ -1,10 +1,12 @@
 class WHISCLI::CLI
-
+  @category = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
+  @links = ["https://www.liquorama.net/spirits/japanese-whisky/", "https://www.liquorama.net/bourbon-whiskey/", "https://www.liquorama.net/single-malt-scotch-whisky/"]
+  @selection = nil 
   def call 
    welcome 
    list_categories
    category_menu
-
+   whisky_menu
   end
 
   def welcome
@@ -12,13 +14,9 @@ class WHISCLI::CLI
   end
 
   def list_categories
-    Scraper.find_categories
-    #uses scraped data to generate menu
-      #scraper generates data, creates whisky objects, whisky objects are in whisky.all
-    #uses .all array to 
-    @categories = Category.all.each_with_index do |item, index|
-      puts "#{index + 1}. #{item}"
-    end
+    puts "1. #{@categories[0]}"
+    puts "2. #{@categories[1]}"
+    puts "3. #{@categories[2]}"
   end
   
   def category_menu
@@ -28,18 +26,21 @@ class WHISCLI::CLI
     puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about:"
     case input
     when "1"
-      puts "More info on #{Category.all[0]}"
+      @selection = @category[0].index
+      puts "More info on #{@category[0]}"
     when "2"
-      puts "More info on #{Category.all[1]}"
+      @selection = @category[1].index
+      puts "More info on #{@category[1]}"
     when "3"
-      puts "More info on #{Category.all[2]}"
-    when "4"
-      puts "More info on #{Category.all[3]}"
-    when "5"
-      puts "More info on #{Category.all[4]}"
-    when "6"
-      puts "More info on #{Category.all[5]}"
+      @selection = @category[2].index
+      puts "More info on #{@category[2]}"
+    when "list"
+      Whisky.wishlist
     end
+  end
+  def whisky_menu
+    Scraper.new.find_whisky(@links[@selection])
+    
   end
 
 
