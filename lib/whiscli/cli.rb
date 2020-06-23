@@ -1,4 +1,4 @@
-class WHISCLI::CLI
+class Whiscli::CLI
   attr_accessor :category, :links, :selection
   @category = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
   @links = ["https://www.liquorama.net/spirits/japanese-whisky/", "https://www.liquorama.net/bourbon-whiskey/", "https://www.liquorama.net/single-malt-scotch-whisky/"]
@@ -39,6 +39,7 @@ class WHISCLI::CLI
       Whisky.wishlist
     end
   end
+  end
   def whisky_menu
     Scraper.new.find_whisky(@links[@selection])
     Whisky.all.each_with_index do |whisky, i|
@@ -46,24 +47,20 @@ class WHISCLI::CLI
     end
     input = gets.strip.downcase
     while input != "exit"
-    Whisky.all.each do |whisky|
-      if whisky.index == input.to_i
-        puts "#{whisky.name}, #{whisky.price}, a fine #{whisky.category}"
-        puts "To add to your wishlist, type 'add'. To return to the main menu, type 'menu'."
-        input = gets.strip
-        if input == "menu"
-          category_menu
-        elsif input == "add"
-          whisky.add_wishlist
-          
-        else 
-          puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
-        end
+      Whisky.all.each do |whisky|
+        if whisky.index == input.to_i
+          puts "#{whisky.name}, #{whisky.price}, a fine #{whisky.category}"
+          puts "To add to your wishlist, type 'add'. To return to the main menu, type 'menu'."
+          input = gets.strip
+            if input == "menu"
+              category_menu
+            elsif input == "add"
+              whisky.add_wishlist
+            else 
+              puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
+            end
+          end
       end
     end
   end
-
-
-
-
 end    
