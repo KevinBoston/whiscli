@@ -1,6 +1,6 @@
 class Whisky
 
-  attr_accessor :name, :age, :price, :link, :alcohol_content, :category, :description
+  attr_accessor :name, :price, :link, :alcohol_content, :category, :description
   @@all = []
   @@list = []
   def initialize
