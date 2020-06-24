@@ -10,6 +10,9 @@ class Scraper
 
    # doc
   #end
+  def initialize
+    
+  end
    name = "Glen - fake"
    price = "$100 - fake"
    description = "fake"

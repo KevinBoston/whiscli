@@ -48,7 +48,7 @@ class Whiscli::CLI
   end
   end
   def whisky_menu
-    Scraper.new.find_whisky(@links[@selection])
+    Scraper.new.find_whisky(@links[@selection-1])
     Whisky.all.each_with_index do |whisky, i|
       puts "#{i}. #{whisky.name}"
     end
