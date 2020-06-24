@@ -8,6 +8,9 @@ class Whiscli::Whisky
     @@all << self
     self.category = Cli.categories[Cli.selection]
   end
+  def self.all 
+    @@all 
+  end
     
 
   def self.add_wishlist
