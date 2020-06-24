@@ -31,15 +31,15 @@ class Whiscli::CLI
    # puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about:"
     case input
     when "1"
-      @selection = @categories[0].index
+      @selection = input.to_i
       puts "More info on #{@categories[0]}"
       whisky_menu
     when "2"
-      @selection = @categories[1].index
+      @selection = input.to_i
       puts "More info on #{@categories[1]}"
       whisky_menu
     when "3"
-      @selection = @categories[2].index
+      @selection = input.to_i
       puts "More info on #{@categories[2]}"
       whisky_menu
     when "list"
