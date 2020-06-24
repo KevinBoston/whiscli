@@ -53,7 +53,7 @@ class Whiscli::Cli
   end
   end
   def whisky_menu
-    scrape = Whiscli::Scraper.new.find_whisky("#{BASEURL} + #{LINKS[@selection-1]}") #instantiates Scraper, calls find_whisky, and passes baseurl + the selection's index
+    scrape = Whiscli::Scraper.new.find_whisky("#{BASEURL}#{LINKS[@selection-1]}") #instantiates Scraper, calls find_whisky, and passes baseurl + the selection's index
     #scraper should create whisky objects, which are added to whisky.all
     Whisky.all.each_with_index do |whisky, i|
       puts "#{i}. #{whisky.name}"

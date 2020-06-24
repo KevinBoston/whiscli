@@ -32,7 +32,7 @@ class Whiscli::Scraper
     #doc = Nokogiri::HTML(open(url))
     #add baseurl and pull index via selector
     doc = Nokogiri::HTML(open(url))
-    frames = doc.css()
+    frames = doc.css('.card-figure')
     #nokogiri... blah blah
     frames.each do |whisky_frame|
     #container = Nokogiri::HTML 
