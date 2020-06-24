@@ -1,4 +1,4 @@
-class Scraper
+class Whiscli::Scraper
   require 'open-uri'
 
  # def find_categories
@@ -22,20 +22,28 @@ class Scraper
     new_whisky.name = name
     new_whisky.price = price
     new_whisky.link = 
-    whisky_page = Nokogiri::HTML.open(new_whisky.link)
+    whisky_page = Nokogiri::HTML(open(new_whisky.link))
     price
     description
     #etc
     new_whisky
   end
-  def find_whisky(url)
-    doc = Nokogiri::HTML.open(url)
-    container = [Cli.links]
-    #nokogiri... blah blah 
-    contailer.each do |whisky_frame|
+  def find_whisky(url, selector)
+    #doc = Nokogiri::HTML(open(url))
+    category_link = Whiscli::Cli.BASEURL + Whiscli::Cli.LINKS[selector-1] #add baseurl and pull index via selector
+    doc = Nokogiri::HTML(open(category_link))
+    #nokogiri... blah blah
+    doc.each do |whisky_frame|
+    #container = Nokogiri::HTML 
+    #container.each do |whisky_frame|
       whisky_frame.scrape_whisky
     end
   end
+  
+  #get title and url, display title to user 
+  #let user select specific whisky
+  #scrape specific whisky 
+  
     #doc.map do |html|
        #if html.tag.contain("whisk")
          #self.scrape_whisky

@@ -1,11 +1,13 @@
-class Whiscli::CLI
+class Whiscli::Cli
   attr_accessor :links, :selection, :categories
 #  attr_reader :categories
+  LINKS = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/"]
+  BASEURL = "https://liquorama.net"
   def initialize
-    @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch"]
-    @links = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/"]
+    @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch Whisky"]
+    #@links = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/"]
     @selection = nil 
-    @baseurl = "https://liquorama.net"
+    #@baseurl = "https://liquorama.net"
   end
   def call 
    welcome 
@@ -17,6 +19,9 @@ class Whiscli::CLI
   def welcome
    puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about or type list to see your wish list:" 
   end
+ def self.links
+   LINKS 
+ end
 
   def list_categories
     puts "1. #{@categories[0]}"
@@ -48,7 +53,8 @@ class Whiscli::CLI
   end
   end
   def whisky_menu
-    Scraper.new.find_whisky(@links[@selection-1])
+    scrape = Whiscli::Scraper.new.find_whisky(@baseurl + LINKS[@selection-1], @selection) #instantiates Scraper, calls find_whisky, and passes baseurl + the selection's index
+    #scraper should create whisky objects, which are added to whisky.all
     Whisky.all.each_with_index do |whisky, i|
       puts "#{i}. #{whisky.name}"
     end

@@ -1,4 +1,4 @@
-class Whisky
+class Whiscli::Whisky
 
   attr_accessor :name, :price, :link, :alcohol_content, :category, :description
   @@all = []
