@@ -60,7 +60,7 @@ class Whiscli::Cli
     end
     input = gets.strip.downcase
     while input != "exit"
-      Whisky.all.each do |whisky|
+      Whiscli::Whisky.all.each do |whisky|
         if whisky.index == input.to_i
           puts "#{whisky.name}, #{whisky.price}, a fine #{whisky.category}"
           puts "To add to your wishlist, type 'add'. To return to the main menu, type 'menu'."
