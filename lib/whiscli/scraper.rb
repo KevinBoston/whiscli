@@ -31,9 +31,9 @@ class Whiscli::Scraper
   def find_whisky(url)
     #doc = Nokogiri::HTML(open(url))
     #add baseurl and pull index via selector
-    doc = Nokogiri::HTML.parse(url)
+    doc = Nokogiri::HTML(open(url))
     frames = doc.css('.card-figure')
-    #nokogiri... blah blah
+    binding.pry
     frames.each do |whisky_frame|
     #container = Nokogiri::HTML 
     #container.each do |whisky_frame|
