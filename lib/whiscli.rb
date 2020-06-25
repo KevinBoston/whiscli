@@ -1,3 +1,4 @@
+require 'pry'
 require 'nokogiri'
 require_relative "./whiscli/version"
 require_relative "./whiscli/scraper"
