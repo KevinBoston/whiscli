@@ -28,16 +28,21 @@ class Whiscli::Scraper
     #etc
     new_whisky
   end
-  def find_whisky(url)
+  def find_whisky(url, selection)
     #doc = Nokogiri::HTML(open(url))
     #add baseurl and pull index via selector
     doc = Nokogiri::HTML(open(url))
-    frames = doc.css('.card-figure')
-    binding.pry
+    frames = doc.css('.card-title a')
+    #binding.pry
     frames.each do |whisky_frame|
     #container = Nokogiri::HTML 
     #container.each do |whisky_frame|
-      whisky_frame.scrape_whisky
+      new_whisk = Whiscli::Whisky.new
+      new_whisk.name = whisky_frame.text
+      new_whisk.link = whisky_frame['href']
+      new_whisk.category = selection
+      
+      #whisky_frame.scrape_whisky
     end
   end
   
