@@ -57,7 +57,7 @@ class Whiscli::Cli
     #scraper should create whisky objects, which are added to whisky.all
     #binding.pry
     Whiscli::Whisky.all.each_with_index do |whisky, i|
-      puts "#{i}. #{whisky.name}"
+      puts "#{i + 1}. #{whisky.name}"
     end
     binding.pry
     input = gets.strip.downcase

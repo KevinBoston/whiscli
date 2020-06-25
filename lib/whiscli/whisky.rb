@@ -6,7 +6,7 @@ class Whiscli::Whisky
   def initialize
     @name = name
     @@all << self
-    self.category = Whiscli::Cli.categories[Whiscli::Cli.selection]
+    #self.category = Whiscli::Cli.categories[Whiscli::Cli.selection]
   end
   def self.all 
     @@all 

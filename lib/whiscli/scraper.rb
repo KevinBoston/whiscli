@@ -13,12 +13,10 @@ class Whiscli::Scraper
   def initialize
     
   end
-   name = "Glen - fake"
-   price = "$100 - fake"
-   description = "fake"
+   
   def self.scrape_whisky
     #doc = Nokogiri::HTML.open(url) 
-    new_whisky = Whisky.new
+    #new_whisky = Whisky.new
     new_whisky.name = name
     new_whisky.price = price
     new_whisky.link = 
@@ -35,25 +33,10 @@ class Whiscli::Scraper
     frames = doc.css('.card-title a')
     #binding.pry
     frames.each do |whisky_frame|
-    #container = Nokogiri::HTML 
-    #container.each do |whisky_frame|
       new_whisk = Whiscli::Whisky.new
       new_whisk.name = whisky_frame.text
       new_whisk.link = whisky_frame['href']
       new_whisk.category = selection
-      
-      #whisky_frame.scrape_whisky
     end
   end
-  
-  #get title and url, display title to user 
-  #let user select specific whisky
-  #scrape specific whisky 
-  
-    #doc.map do |html|
-       #if html.tag.contain("whisk")
-         #self.scrape_whisky
-       #end
-    #end
-
 end
