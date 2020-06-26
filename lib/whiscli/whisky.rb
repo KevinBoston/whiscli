@@ -11,6 +11,9 @@ class Whiscli::Whisky
   def self.all 
     @@all 
   end
+  def self.wipe 
+    @@all.clear 
+  end
     
 
   def add_wishlist
