@@ -14,9 +14,12 @@ class Whiscli::Whisky
     
 
   def add_wishlist
-    @@list << self
+    @@list << self.name
+    puts "#{self.name} was added to your wishlist!"
   end
   def self.wishlist
-    @@list 
+    @@list.each do |whisky|
+      puts "-#{whisky.name}"
+    end
   end
 end
