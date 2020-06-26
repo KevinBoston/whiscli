@@ -14,12 +14,12 @@ class Whiscli::Scraper
     
   end
    
-  def self.scrape_whisky(whisky_obj)
-  page = Nokogiri::HTML(open(whisky_obj.link))
-  whisky_obj.price = page.css('.price').text.strip
-  whisky_obj.description = page.css('.tab-content p').text
-  whisky_obj
-end
+  def scrape_whisky(whisky_obj)
+    page = Nokogiri::HTML(open(whisky_obj.link))
+    whisky_obj.price = page.css('.price').text.strip
+    whisky_obj.description = page.css('.tab-content p').text
+    whisky_obj
+  end
   def find_whisky(url, selection)
     #doc = Nokogiri::HTML(open(url))
     #add baseurl and pull index via selector

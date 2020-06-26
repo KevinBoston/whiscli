@@ -13,7 +13,7 @@ class Whiscli::Whisky
   end
     
 
-  def self.add_wishlist
+  def add_wishlist
     @@list << self
   end
   def self.wishlist

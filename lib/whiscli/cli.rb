@@ -56,11 +56,11 @@ class Whiscli::Cli
     Whiscli::Scraper.new.find_whisky("#{BASEURL}#{LINKS[@selection-1]}", @categories[@selection-1]) #instantiates Scraper, calls find_whisky, and passes baseurl + the selection's index
     #scraper should create whisky objects, which are added to whisky.all
     #binding.pry
-    puts "Please select a variety of #{@category[input.to_i - 1]} by typing its number:"
+    puts "Please select a variety of #{@categories[@selection.to_i - 1]} by typing its number:"
     Whiscli::Whisky.all.each_with_index do |whisky, i|
       puts "#{i + 1}. #{whisky.name}"
     end
-    binding.pry
+    #binding.pry
       input = gets.strip.downcase
     while input != "exit" || "list"
       selected_whisky = Whiscli::Whisky.all[input.to_i - 1]
@@ -72,11 +72,10 @@ class Whiscli::Cli
             if input == "menu"
               category_menu
             elsif input == "add"
-              whisky.add_wishlist
+              selected_whisky.add_wishlist
             else 
               puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
             end
           end
+        end
       end
-    end
-  end
