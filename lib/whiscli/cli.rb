@@ -1,10 +1,10 @@
 class Whiscli::Cli
   attr_accessor :links, :selection, :categories
 #  attr_reader :categories
-  LINKS = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/"]
+  LINKS = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/", "/irish-whiskey/"]
   BASEURL = "https://liquorama.net"
   def initialize
-    @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch Whisky"]
+    @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch Whisky", "Irish Whiskey"]
     #@links = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/"]
     @selection = nil 
     #@baseurl = "https://liquorama.net"
@@ -47,9 +47,15 @@ class Whiscli::Cli
       @selection = input.to_i
       puts "More info on #{@categories[2]}"
       whisky_menu
+      when "4"
+      @selection = input.to_i
+      puts "More info on #{@categories[3]}"
+      whisky_menu
     when "list"
       Whiscli::Whisky.wishlist
       call
+    when "exit"
+      exit
     end
   end
   end
@@ -76,9 +82,13 @@ class Whiscli::Cli
           elsif input == "add"
             selected_whisky.add_wishlist
             call
+          if input == "exit"
+            exit
           else 
             puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
           end
         end
       end
+    elsif input == "exit"
+      exit
     end
