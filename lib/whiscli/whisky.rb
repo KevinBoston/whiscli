@@ -22,6 +22,7 @@ class Whiscli::Whisky
   end
   def self.wishlist
     @@list.uniq!
+    puts "Your wishlist:"
     @@list.each do |whisky|
       puts "-#{whisky}"
     end

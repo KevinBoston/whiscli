@@ -49,6 +49,7 @@ class Whiscli::Cli
       whisky_menu
     when "list"
       Whiscli::Whisky.wishlist
+      call
     end
   end
   end
