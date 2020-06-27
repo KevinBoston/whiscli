@@ -1,13 +1,10 @@
 class Whiscli::Cli
   attr_accessor :links, :selection, :categories
-#  attr_reader :categories
   LINKS = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/", "/irish-whiskey/"]
   BASEURL = "https://liquorama.net"
   def initialize
     @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch Whisky", "Irish Whiskey"]
-    #@links = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/"]
-    @selection = nil 
-    #@baseurl = "https://liquorama.net"
+    @selection = nil
   end
   def call 
    welcome 
@@ -24,10 +21,7 @@ class Whiscli::Cli
  end
 
   def list_categories
-    puts "1. #{@categories[0]}"
-    puts "2. #{@categories[1]}"
-    puts "3. #{@categories[2]}"
-    puts "4. #{@categories[3]}"
+    @categories.each_with_index {|cat, i| puts "#{i + 1}. #{cat}"}
   end
   
   def category_menu
@@ -37,7 +31,6 @@ class Whiscli::Cli
       exit 
     end
     while input != "exit"
-   # puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about:"
     case input
     when "1"
       @selection = input.to_i

@@ -17,7 +17,7 @@ class Whiscli::Scraper
     doc = Nokogiri::HTML(open(url))
     frames = doc.css('.card-title a')
     bottom = doc.css('.card-text span.price').text.split.uniq!
-    binding.pry
+    #binding.pry
     frames.each do |whisky_frame|
       new_whisk = Whiscli::Whisky.new
       new_whisk.name = whisky_frame.text
