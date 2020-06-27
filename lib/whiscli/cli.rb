@@ -48,6 +48,10 @@ class Whiscli::Cli
       @selection = input.to_i
       puts "More info on #{@categories[3]}"
       whisky_menu
+      when "5"
+      @selection = input.to_i
+      puts "More info on #{@categories[4]}"
+      whisky_menu
     when "list"
       Whiscli::Whisky.wishlist
       call
