@@ -26,5 +26,6 @@ class Whiscli::Whisky
     @@list.each do |whisky|
       puts "-#{whisky}"
     end
+    puts "-----------------"
   end
 end
