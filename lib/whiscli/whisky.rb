@@ -21,8 +21,9 @@ class Whiscli::Whisky
     puts "#{self.name} was added to your wishlist!"
   end
   def self.wishlist
+    @@list.uniq!
     @@list.each do |whisky|
-      puts "-#{whisky.name}"
+      puts "-#{whisky}"
     end
   end
 end
