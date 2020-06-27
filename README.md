@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Welcome to WhisCLI! To use, type `./bin/whiscli` and follow instructions. The prompt will provide a list of whisky categories for you to explore and will provide further information on the specific bottle you select. Enjoy adding the items to your wishlist and maybe go get one after you're done!
 
 ## Development
 
