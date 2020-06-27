@@ -27,11 +27,15 @@ class Whiscli::Cli
     puts "1. #{@categories[0]}"
     puts "2. #{@categories[1]}"
     puts "3. #{@categories[2]}"
+    puts "4. #{@categories[3]}"
   end
   
   def category_menu
     input = nil
     input = gets.strip.downcase
+    if input == "exit"
+      exit 
+    end
     while input != "exit"
    # puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about:"
     case input
@@ -54,9 +58,8 @@ class Whiscli::Cli
     when "list"
       Whiscli::Whisky.wishlist
       call
-    when "exit"
-      exit
     end
+    exit
   end
   end
   def whisky_menu
@@ -70,6 +73,9 @@ class Whiscli::Cli
     end
     #binding.pry
       input = gets.strip.downcase
+      if input == "exit"
+        exit 
+      end
       selected_whisky = Whiscli::Whisky.all[input.to_i - 1]
       Whiscli::Scraper.new.scrape_whisky(selected_whisky)
     if input != "exit" || input != "list" || input != "add"
@@ -77,18 +83,16 @@ class Whiscli::Cli
       puts selected_whisky.description
       puts "To add to your wishlist, type 'add'. To return to the main menu, type 'menu'."
         input = gets.strip
-          if input == "menu"
-            call
-          elsif input == "add"
+        if input == "exit"
+          exit 
+        elsif input == "menu"
+          call
+        elsif input == "add"
             selected_whisky.add_wishlist
             call
-          if input == "exit"
-            exit
-          else 
-            puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
-          end
+        else 
+          puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
         end
       end
-    elsif input == "exit"
-      exit
     end
+  end
