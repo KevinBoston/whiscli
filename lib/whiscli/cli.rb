@@ -14,6 +14,12 @@ class Whiscli::Cli
    category_menu
    whisky_menu
   end
+  
+  def whisky_menu
+    display_whisky
+    print_whisky_info
+    add_wishlist
+  end
 
   def welcome
    puts "Welcome to Whiscli! Please select the type of whisk(e)y you would like to learn about or type list to see your wish list:" 
@@ -23,14 +29,7 @@ class Whiscli::Cli
     @categories.each_with_index {|cat, i| puts "#{i + 1}. #{cat}"}
   end
   
-  def wishlist
-    @@list.uniq!
-    puts "Your wishlist:"
-    @@list.each do |whisky|
-      puts "-#{whisky.name}"
-    end
-    puts "-----------------"
-  end
+  
   def category_menu
     input = nil
     input = gets.strip.downcase
@@ -44,38 +43,36 @@ class Whiscli::Cli
       puts SECRET 
       category_menu
     end
-       while input != "exit"
-    case input
-    when "1"
-      @selection = input.to_i
-      puts "More info on #{@categories[0]}"
-      whisky_menu
-    when "2"
-      @selection = input.to_i
-      puts "More info on #{@categories[1]}"
-      whisky_menu
-    when "3"
-      @selection = input.to_i
-      puts "More info on #{@categories[2]}"
-      whisky_menu
-      when "4"
-      @selection = input.to_i
-      puts "More info on #{@categories[3]}"
-      whisky_menu
+    while input != "exit"
+      case input
+        when "1"
+          @selection = input.to_i
+          puts "More info on #{@categories[0]}"
+          whisky_menu
+        when "2"
+          @selection = input.to_i
+          puts "More info on #{@categories[1]}"
+          whisky_menu
+        when "3"
+          @selection = input.to_i
+          puts "More info on #{@categories[2]}"
+          whisky_menu
+        when "4"
+          @selection = input.to_i
+          puts "More info on #{@categories[3]}"
+          whisky_menu
+        end
     end
-    #exit
-  end
   end
   
   def display_whisky
     @selected_arr = Whiscli::Scraper.new.find_whisky("#{BASEURL}#{LINKS[@selection-1]}", @categories[@selection-1]) 
-    #binding.pry
     puts "Please select a variety of #{@categories[@selection.to_i - 1]} by typing its number:"
     selected_arr.each_with_index do |whisky, i|
       puts "#{i + 1}. #{whisky.name}"
     end
-    #print_whisky
   end
+  
   def print_whisky_info
     input = gets.strip.downcase
     if input.to_i <= @selected_arr.length
@@ -95,11 +92,7 @@ class Whiscli::Cli
   end
     
   
-  def whisky_menu
-    display_whisky
-    print_whisky_info
-    add_wishlist
-  end
+
   def add_wishlist
     input = gets.strip
       if input == "exit"
@@ -115,4 +108,13 @@ class Whiscli::Cli
         print_whisky_info
       end
     end
+  
+  def wishlist
+    @@list.uniq!
+    puts "Your wishlist:"
+    @@list.each do |whisky|
+      puts "-#{whisky.name}"
+    end
+    puts "-----------------"
   end
+end

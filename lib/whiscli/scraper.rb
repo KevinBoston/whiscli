@@ -27,13 +27,4 @@ class Whiscli::Scraper
       new_whisk
     end
   end
-  # def find_categories
-    # #faceted-search-container > div > ul > li.active-category.collapsable > ul
-    #navigate to spirits menu
-    #compare headings to ensure they contain 'whisk'
-    #store matches in array
-    #scrape match array to make category objects
-
-   # doc
-  #end
 end
