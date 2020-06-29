@@ -2,6 +2,7 @@ class Whiscli::Cli
   attr_accessor :links, :selection, :categories
   LINKS = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/", "/irish-whiskey/"]
   BASEURL = "https://liquorama.net"
+  @@list = []
   def initialize
     @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch Whisky", "Irish Whiskey"]
     @selection = nil
@@ -24,6 +25,14 @@ class Whiscli::Cli
     @categories.each_with_index {|cat, i| puts "#{i + 1}. #{cat}"}
   end
   
+  def wishlist
+    @@list.uniq!
+    puts "Your wishlist:"
+    @@list.each do |whisky|
+      puts "-#{whisky.name}"
+    end
+    puts "-----------------"
+  end
   def category_menu
     input = nil
     input = gets.strip.downcase
@@ -53,7 +62,8 @@ class Whiscli::Cli
       puts "More info on #{@categories[4]}"
       whisky_menu
     when "list"
-      Whiscli::Whisky.wishlist
+      #Whiscli::Whisky.wishlist
+      wishlist
       call
     end
     exit
@@ -61,11 +71,11 @@ class Whiscli::Cli
   end
   def whisky_menu
     Whiscli::Whisky.wipe
-    Whiscli::Scraper.new.find_whisky("#{BASEURL}#{LINKS[@selection-1]}", @categories[@selection-1]) #instantiates Scraper, calls find_whisky, and passes baseurl + the selection's index
+    selected_arr = Whiscli::Scraper.new.find_whisky("#{BASEURL}#{LINKS[@selection-1]}", @categories[@selection-1]) #instantiates Scraper, calls find_whisky, and passes baseurl + the selection's index
     #scraper should create whisky objects, which are added to whisky.all
     #binding.pry
     puts "Please select a variety of #{@categories[@selection.to_i - 1]} by typing its number:"
-    Whiscli::Whisky.all.each_with_index do |whisky, i|
+    selected_arr.each_with_index do |whisky, i|
       puts "#{i + 1}. #{whisky.name}"
     end
     #binding.pry
@@ -75,7 +85,7 @@ class Whiscli::Cli
       end
       selected_whisky = Whiscli::Whisky.all[input.to_i - 1]
       Whiscli::Scraper.new.scrape_whisky(selected_whisky)
-    if input != "exit" || input != "list" || input != "add"
+    #if input != "exit" || input != "list" || input != "add"
       puts "#{selected_whisky.name}, #{selected_whisky.price}, a fine #{selected_whisky.category}"
       puts selected_whisky.description
       puts "To add to your wishlist, type 'add'. To return to the main menu, type 'menu'."
@@ -85,11 +95,14 @@ class Whiscli::Cli
         elsif input == "menu"
           call
         elsif input == "add"
-            selected_whisky.add_wishlist
-            call
+          @@list << selected_whisky
+          puts "#{selected_whisky.name} was added to your wishlist!"
+          #selected_whisky.add_wishlist
+          call
         else 
           puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
+          whisky_menu
         end
-      end
+      #end
     end
   end

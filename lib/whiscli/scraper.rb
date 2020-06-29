@@ -18,12 +18,13 @@ class Whiscli::Scraper
     frames = doc.css('.card-title a')
     bottom = doc.css('.card-text span.price').text.split.uniq!
     #binding.pry
-    frames.each do |whisky_frame|
+    frames.map do |whisky_frame|
       new_whisk = Whiscli::Whisky.new
       new_whisk.name = whisky_frame.text
       new_whisk.link = whisky_frame['href']
       new_whisk.category = selection
       new_whisk.price = bottom[1]
+      new_whisk
     end
   end
   # def find_categories
