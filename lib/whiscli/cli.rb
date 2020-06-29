@@ -1,5 +1,5 @@
 class Whiscli::Cli
-  attr_accessor :selection, :categories, :selected_whisky
+  attr_accessor :selection, :categories, :selected_whisky, :selected_arr
   LINKS = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/", "/irish-whiskey/"]
   BASEURL = "https://liquorama.net"
   @@list = []
@@ -54,10 +54,6 @@ class Whiscli::Cli
       @selection = input.to_i
       puts "More info on #{@categories[3]}"
       whisky_menu
-      when "5"
-      @selection = input.to_i
-      puts "More info on #{@categories[4]}"
-      whisky_menu
     when "list"
       wishlist
       call
@@ -67,7 +63,7 @@ class Whiscli::Cli
   end
   
   def display_whisky
-    selected_arr = Whiscli::Scraper.new.find_whisky("#{BASEURL}#{LINKS[@selection-1]}", @categories[@selection-1]) 
+    @selected_arr = Whiscli::Scraper.new.find_whisky("#{BASEURL}#{LINKS[@selection-1]}", @categories[@selection-1]) 
     #binding.pry
     puts "Please select a variety of #{@categories[@selection.to_i - 1]} by typing its number:"
     selected_arr.each_with_index do |whisky, i|
@@ -75,12 +71,12 @@ class Whiscli::Cli
     end
     #print_whisky
   end
-  def print_whisky
+  def print_whisky_info
     input = gets.strip.downcase
     if input == "exit"
       exit 
     end
-    @selected_whisky = Whiscli::Whisky.all[input.to_i - 1]
+    @selected_whisky = @selected_arr[input.to_i - 1]
     Whiscli::Scraper.new.scrape_whisky(selected_whisky)
     puts "#{selected_whisky.name}, #{selected_whisky.price}, a fine #{selected_whisky.category}"
     puts selected_whisky.description
@@ -91,7 +87,7 @@ class Whiscli::Cli
   
   def whisky_menu
     display_whisky
-    print_whisky
+    print_whisky_info
     add_wishlist
   end
   def add_wishlist
