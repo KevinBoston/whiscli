@@ -2,6 +2,7 @@ class Whiscli::Cli
   attr_accessor :selection, :categories, :selected_whisky, :selected_arr
   LINKS = ["/spirits/japanese-whisky/", "/bourbon-whiskey/", "/single-malt-scotch-whisky/", "/irish-whiskey/"]
   BASEURL = "https://liquorama.net"
+  SECRET = "We do not have any secret whiskies. Please choose from the options listed or type exit."
   @@list = []
   def initialize
     @categories = ["Japanese Whisky", "Bourbon Whiskey", "Single Malt Scotch Whisky", "Irish Whiskey"]
@@ -33,10 +34,17 @@ class Whiscli::Cli
   def category_menu
     input = nil
     input = gets.strip.downcase
+ 
     if input == "exit"
       exit 
+    elsif input == "list"
+      wishlist 
+      call 
+    elsif input.to_i > 4 || input.to_i <= 0 
+      puts SECRET 
+      category_menu
     end
-    while input != "exit"
+       while input != "exit"
     case input
     when "1"
       @selection = input.to_i
@@ -54,11 +62,8 @@ class Whiscli::Cli
       @selection = input.to_i
       puts "More info on #{@categories[3]}"
       whisky_menu
-    when "list"
-      wishlist
-      call
     end
-    exit
+    #exit
   end
   end
   
@@ -73,15 +78,20 @@ class Whiscli::Cli
   end
   def print_whisky_info
     input = gets.strip.downcase
-    if input == "exit"
-      exit 
+    if input.to_i <= @selected_arr.length
+      if input == "exit"
+        exit 
+      end
+      @selected_whisky = @selected_arr[input.to_i - 1]
+      Whiscli::Scraper.new.scrape_whisky(selected_whisky)
+      puts "#{selected_whisky.name}, #{selected_whisky.price}, a fine #{selected_whisky.category}"
+      puts selected_whisky.description
+      puts "To add to your wishlist, type 'add'. To return to the main menu, type 'menu'."
+      add_wishlist
+    else 
+      puts SECRET
+      print_whisky_info
     end
-    @selected_whisky = @selected_arr[input.to_i - 1]
-    Whiscli::Scraper.new.scrape_whisky(selected_whisky)
-    puts "#{selected_whisky.name}, #{selected_whisky.price}, a fine #{selected_whisky.category}"
-    puts selected_whisky.description
-    puts "To add to your wishlist, type 'add'. To return to the main menu, type 'menu'."
-    add_wishlist
   end
     
   
@@ -102,7 +112,7 @@ class Whiscli::Cli
         call
       else 
         puts "We only work with a select variety of spirits. Please type either 'add', 'menu', or 'exit'."
-        print_whisky
+        print_whisky_info
       end
     end
   end
